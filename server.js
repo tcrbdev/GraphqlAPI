@@ -1,25 +1,30 @@
-import config from './config/config'
 import express from 'express'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
-import mongoose from 'mongoose'
-import bluebird from 'bluebird'
-import casual from 'casual'
+import sql from 'mssql'
 
 import jwt from 'jsonwebtoken'
 import { UserModel } from './models/user'
 import middleware from './middleware'
+import { config, configAccessHeader } from './config'
+import md5 from 'md5'
+
+import {
+    MasterProvince,
+    MasterAmphur,
+    MasterDistrict,
+    MasterSourceType,
+    MasterChannelType
+} from './Master'
 
 const app = express()
 const apiRoutes = express.Router()
 
-mongoose.Promise = bluebird
-const mongo = mongoose.connect(config.MONGO_ENDPOINT, config.MONGO_OPTIONS, (err, result) => {
-    if (err)
-        console.log(err)
-})
+// app.set('trust proxy', '127.0.0.1');
 
 app.set('skey', config.SECRET_KEY)
+
+app.use(configAccessHeader)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -29,15 +34,11 @@ app.use('/api/', apiRoutes)
 
 apiRoutes.use(middleware(app, jwt))
 
-apiRoutes.get('/', (req, res) => {
-    res.json({ message: 'Test API RUNNING..' })
-})
-
-apiRoutes.get('/users', (req, res) => {
-    UserModel.find({}, (err, users) => {
-        res.json(users)
-    })
-})
+app.get('/master/province', MasterProvince)
+app.get('/master/amphur', MasterAmphur)
+app.get('/master/district', MasterDistrict)
+app.get('/master/sourcetype', MasterSourceType)
+app.get('/master/channeltype', MasterChannelType)
 
 apiRoutes.post('/authenticate', (req, res) => {
     UserModel.findOne({
@@ -52,7 +53,7 @@ apiRoutes.post('/authenticate', (req, res) => {
             })
         }
         else {
-            if (user.password != req.body.password) {
+            if (md5(user.password) != req.body.password) {
                 res.json({
                     success: false,
                     message: 'Authentication failed. Wrong password.'
@@ -71,23 +72,6 @@ apiRoutes.post('/authenticate', (req, res) => {
                 })
             }
         }
-    })
-})
-
-apiRoutes.get('/setup', (req, res) => {
-    const first_name = casual.first_name
-    const user = new UserModel({
-        name: first_name,
-        password: 'password',
-        admin: true
-    })
-
-    user.save(err => {
-        if (err)
-            console.log("New user error")
-
-        console.log(`New user ${first_name} success.`)
-        res.json({ success: true })
     })
 })
 
