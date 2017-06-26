@@ -3,5 +3,14 @@ export {
     MasterAmphur,
     MasterDistrict,
     MasterSourceType,
-    MasterChannelType
+    MasterChannelType,
+    MasterBusinessType,
+    MasterInterestingProduct,
+    MasterOpportunityCustomer,
+    MasterPresentProductType,
+    MasterBusinessPrefix,
+    MasterAppointmentReason,
+    MasterPrefix,
+    
+    MasterBranchTemporary
 } from './master'

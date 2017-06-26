@@ -103,3 +103,123 @@ export const MasterChannelType = (req, res) => {
             res.json(err)
         })
 }
+
+export const MasterBusinessType = (req, res) => {
+    const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
+        .then(pool => {
+            return pool.request()
+                .execute("sp_GetMasterBusinessType")
+        })
+        .then(result => {
+            res.json(result.recordset)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
+}
+
+export const MasterInterestingProduct = (req, res) => {
+    const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
+        .then(pool => {
+            return pool.request()
+                .execute("sp_GetMasterInterestingProduct")
+        })
+        .then(result => {
+            res.json(result.recordset)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
+}
+
+export const MasterOpportunityCustomer = (req, res) => {
+    const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
+        .then(pool => {
+            return pool.request()
+                .execute("sp_GetMasterOpportunityCustomer")
+        })
+        .then(result => {
+            res.json(result.recordset)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
+}
+
+export const MasterPresentProductType = (req, res) => {
+    const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
+        .then(pool => {
+            return pool.request()
+                .execute("sp_GetMasterPresentProductType")
+        })
+        .then(result => {
+            res.json(result.recordset)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
+}
+
+export const MasterBusinessPrefix = (req, res) => {
+    const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
+        .then(pool => {
+            return pool.request()
+                .execute("sp_GetMasterBusinessPrefix")
+        })
+        .then(result => {
+            res.json(result.recordset)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
+}
+
+export const MasterAppointmentReason = (req, res) => {
+    const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
+        .then(pool => {
+            return pool.request()
+                .execute("sp_GetMasterAppointmentReason")
+        })
+        .then(result => {
+            res.json(result.recordset)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
+}
+
+export const MasterPrefix = (req, res) => {
+    const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
+        .then(pool => {
+            return pool.request()
+                .execute("sp_GetMasterPrefix")
+        })
+        .then(result => {
+            res.json(result.recordset)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
+}
+
+export const MasterBranchTemporary = (req, res) => {
+    const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
+        .then(pool => {
+            return pool.request()
+                .execute("sp_GetMasterBranch")
+        })
+        .then(result => {
+            res.json(result.recordsets)
+        })
+        .catch(err => {
+            console.log(err)
+            res.json(err)
+        })
+}
