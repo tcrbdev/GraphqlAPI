@@ -52,6 +52,7 @@
     "request-promise": "^4.2.0",
     "sequelize": "^3.30.4",
     "serve-index": "^1.9.0",
+    "serve-static": "^1.12.4",
     "sqlite": "^2.7.0"
   },
   "eslintConfig": {

@@ -15,6 +15,8 @@ import multer from 'multer'
 
 import os from 'os-utils'
 
+import serveIndex from 'serve-index'
+
 import {
     MasterProvince,
     MasterAmphur,
@@ -133,6 +135,14 @@ app.put('/nano/marker/note', UpdateMarkerNote)
 app.delete('/nano/marker/note/:SysNO', DeleteMarkerNote)
 app.patch('/nano/marker/note', UpdateMarkerNoteDefault)
 app.get('/nano/ca/summary/:CAID', GetSummaryCAOnly)
+
+
+app.use('/ftp', express.static('D:/market_image'))
+app.use('/ftp', serveIndex('D:/market_image', {
+    icons: true,
+    view: 'details'
+}))
+
 
 
 
