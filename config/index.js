@@ -20,7 +20,8 @@ export const config = {
         user: "sa",
         password: "P@ssw0rd1234",
         server: "TC001PCIS1P",
-        database: "PCIS_Master"
+        database: "PCIS_Master",
+        requestTimeout: 150000,
     }
 }
 

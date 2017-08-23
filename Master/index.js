@@ -11,6 +11,29 @@ export {
     MasterBusinessPrefix,
     MasterAppointmentReason,
     MasterPrefix,
-    
-    MasterBranchTemporary
+
+    MasterBranchTemporary,
+    MasterRegion,
+    MasterArea,
+    MasterBranch,
+    MasterTargetMarketProvince,
+    GetNanoMarkerMap,
+    GetNanoMarketInformation,
+    GetNanoBranchInformation,
+    GetNanoCAInformation,
+    GetNanoComplititorProvince,
+    GetNanoComplititor,
+
+    GetNanoProductPerformance,
+    GetNanoTotalSummary,
+    GetNanoGroupBySummary,
+
+    InsertMarkerNote,
+    UpdateMarkerNote,
+    DeleteMarkerNote,
+    UpdateMarkerNoteDefault,
+    GetSummaryCAOnly,
+
+    GetNotMatchLocationCompettitor,
+    GetNotMatchLocationCompettitor_update
 } from './master'

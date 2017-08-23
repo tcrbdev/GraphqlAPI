@@ -13,6 +13,7 @@ import md5 from 'md5'
 import fs from 'fs'
 import multer from 'multer'
 
+import os from 'os-utils'
 
 import {
     MasterProvince,
@@ -28,7 +29,30 @@ import {
     MasterAppointmentReason,
     MasterPrefix,
 
-    MasterBranchTemporary
+    MasterBranchTemporary,
+    MasterRegion,
+    MasterArea,
+    MasterBranch,
+    MasterTargetMarketProvince,
+    GetNanoMarkerMap,
+    GetNanoMarketInformation,
+    GetNanoBranchInformation,
+    GetNanoCAInformation,
+    GetNanoComplititorProvince,
+    GetNanoComplititor,
+
+    GetNanoProductPerformance,
+    GetNanoTotalSummary,
+    GetNanoGroupBySummary,
+
+    InsertMarkerNote,
+    UpdateMarkerNote,
+    DeleteMarkerNote,
+    UpdateMarkerNoteDefault,
+    GetSummaryCAOnly,
+
+    GetNotMatchLocationCompettitor,
+    GetNotMatchLocationCompettitor_update
 } from './Master'
 
 const app = express()
@@ -88,8 +112,32 @@ app.get('/master/businessprefix', MasterBusinessPrefix)
 app.get('/master/appointmentreason', MasterAppointmentReason)
 app.get('/master/prefix', MasterPrefix)
 
+app.get('/master/region', MasterRegion)
+app.get('/master/area', MasterArea)
+app.get('/master/branch', MasterBranch)
+app.get('/master/target/market/province', MasterTargetMarketProvince)
+app.get('/master/calist', GetNanoCAInformation)
+app.get('/master/complititor/province', GetNanoComplititorProvince)
+app.post('/master/complititor', GetNanoComplititor)
+app.post('/nano/marker', GetNanoMarkerMap)
+app.get('/nano/market/:MarketCode', GetNanoMarketInformation)
+app.get('/nano/branch/:BranchCode', GetNanoBranchInformation)
 app.get('/temp/branch', MasterBranchTemporary)
 
+app.post('/nano/product/performance', GetNanoProductPerformance)
+app.post('/nano/total/summary', GetNanoTotalSummary)
+app.post('/nano/groupby/summary', GetNanoGroupBySummary)
+
+app.post('/nano/marker/note', InsertMarkerNote)
+app.put('/nano/marker/note', UpdateMarkerNote)
+app.delete('/nano/marker/note/:SysNO', DeleteMarkerNote)
+app.patch('/nano/marker/note', UpdateMarkerNoteDefault)
+app.get('/nano/ca/summary/:CAID', GetSummaryCAOnly)
+
+
+
+app.get('/temp/compettitor', GetNotMatchLocationCompettitor)
+app.post('/temp/compettitor', GetNotMatchLocationCompettitor_update)
 
 app.get('/gridAssignment', (req, res) => {
     res.json(data.gridAssignment)
@@ -181,3 +229,8 @@ app.listen(config.API_PORT, (error) => {
         console.log(`listen on port ${config.API_PORT}`)
     }
 })
+
+os.cpuUsage(v => {
+    console.log(`CPU Usage (%) : ${v}`)
+})
+
