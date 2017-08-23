@@ -16,6 +16,7 @@ import multer from 'multer'
 import os from 'os-utils'
 
 import serveIndex from 'serve-index'
+import serveStatic from 'serve-static'
 
 import {
     MasterProvince,
@@ -137,11 +138,42 @@ app.patch('/nano/marker/note', UpdateMarkerNoteDefault)
 app.get('/nano/ca/summary/:CAID', GetSummaryCAOnly)
 
 
-app.use('/ftp', express.static('D:/market_image'))
-app.use('/ftp', serveIndex('D:/market_image', {
+// app.use('/ftp', express.static('D:/market_image'))
+app.use('/ftp', serveStatic('D:/market_images'))
+app.use('/ftp', serveIndex('D:/market_images', {
     icons: true,
-    view: 'details'
+    view: 'details',
+    filter: (filename, index, files, dir) => {
+        console.log(filename, files, dir)
+        return true
+        // res.json({
+        //     filename,
+        //     index,
+        //     files,
+        //     dir
+        // })
+    }
 }))
+
+app.get('/test', (req, res) => {
+    const index = serveIndex('D:/market_image', {
+        icons: true,
+        view: 'details',
+        filter: (filename, index, files, dir) => {
+            console.log(filename, files, dir)
+            return filename == 'East'
+            // res.json({
+            //     filename,
+            //     index,
+            //     files,
+            //     dir
+            // })
+        }
+    })
+
+    // app.use(index(req, res))
+})
+
 
 
 

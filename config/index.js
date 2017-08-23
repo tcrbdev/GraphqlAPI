@@ -2,7 +2,7 @@ import multer from 'multer'
 
 export const config = {
     SECRET_KEY: 'P@ssw0rd1234',
-    MONGO_ENDPOINT: 'mongodb://localhost:27017/users',
+    MONGO_ENDPOINT: 'mongodb://TC001PCIS1P:27017/users',
     MONGO_OPTIONS: {
         user: 'sa',
         pass: 'P@ssw0rd1234',
