@@ -229,10 +229,11 @@ export const MasterRegion = (req, res) => {
     const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
         .then(pool => {
             return pool.request()
+                .input("EmpCode", sql.NVarChar, req.params.EmpCode)
                 .execute("sp_GetMasterRegion")
         })
         .then(result => {
-            res.json(result.recordset)
+            res.json(result.recordsets)
         })
         .catch(err => {
             console.log(err)
@@ -244,6 +245,7 @@ export const MasterArea = (req, res) => {
     const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
         .then(pool => {
             return pool.request()
+                .input("EmpCode", sql.NVarChar, req.params.EmpCode)
                 .execute("sp_GetMasterArea")
         })
         .then(result => {
@@ -259,6 +261,7 @@ export const MasterBranch = (req, res) => {
     const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
         .then(pool => {
             return pool.request()
+                .input("EmpCode", sql.NVarChar, req.params.EmpCode)
                 .execute("sp_GetMasterBranch")
         })
         .then(result => {
@@ -274,6 +277,7 @@ export const MasterTargetMarketProvince = (req, res) => {
     const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
         .then(pool => {
             return pool.request()
+                .input("EmpCode", sql.NVarChar, req.params.EmpCode)
                 .execute("sp_GetMasterTargetMarketProvince")
         })
         .then(result => {
@@ -300,6 +304,7 @@ export const GetNanoMarkerMap = (req, res) => {
                 .input("IncludeKioskMarket", sql.NVarChar, req.body.IncludeKioskMarket)
                 .input("IncludePotentialMarket", sql.NVarChar, req.body.IncludePotentialMarket)
                 .input("Province", sql.NVarChar, req.body.Province)
+                .input("EmpCode", sql.NVarChar, req.body.EmpCode)
                 .execute("sp_GetNanoMarkerMap")
         })
         .then(result => {
@@ -347,6 +352,7 @@ export const GetNanoCAInformation = (req, res) => {
     const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
         .then(pool => {
             return pool.request()
+                .input("EmpCode", sql.NVarChar, req.params.EmpCode)
                 .input("BranchCode", sql.NVarChar, req.params.BranchCode)
                 .execute("sp_GetMasterCA")
         })
@@ -363,6 +369,7 @@ export const GetNanoComplititorProvince = (req, res) => {
     const pool = new sql.ConnectionPool(config.SQL_MASTER_CONFIG).connect()
         .then(pool => {
             return pool.request()
+                .input("EmpCode", sql.NVarChar, req.params.EmpCode)
                 .execute("sp_GetMasterComplititorProvince")
         })
         .then(result => {
@@ -382,6 +389,7 @@ export const GetNanoComplititor = (req, res) => {
                 .input("Srisawat", sql.NVarChar, req.body.Srisawat)
                 .input("Muangthai", sql.NVarChar, req.body.Muangthai)
                 .input("ngerdlor", sql.NVarChar, req.body.ngerdlor)
+                .input("EmpCode", sql.NVarChar, req.body.EmpCode)
                 .execute("sp_GetMasterComplititor")
         })
         .then(result => {
@@ -404,6 +412,7 @@ export const GetNanoProductPerformance = (req, res) => {
                 .input("BranchCode", sql.NVarChar, req.body.BranchCode)
                 .input("CAName", sql.NVarChar, req.body.CAName)
                 .input("MarketName", sql.NVarChar, req.body.MarketName)
+                .input("EmpCode", sql.NVarChar, req.body.EmpCode)
                 .execute("Nano_GET_Product_Preformance")
         })
         .then(result => {
@@ -424,6 +433,7 @@ export const GetNanoTotalSummary = (req, res) => {
                 .input("BranchCode", sql.NVarChar, req.body.BranchCode)
                 .input("CAName", sql.NVarChar, req.body.CAName)
                 .input("MarketName", sql.NVarChar, req.body.MarketName)
+                .input("EmpCode", sql.NVarChar, req.body.EmpCode)
                 .execute("Nano_GET_Total_Summary")
         })
         .then(result => {
@@ -445,6 +455,7 @@ export const GetNanoGroupBySummary = (req, res) => {
                 .input("CAName", sql.NVarChar, req.body.CAName)
                 .input("MarketName", sql.NVarChar, req.body.MarketName)
                 .input("QueryType", sql.NVarChar, req.body.QueryType)
+                .input("EmpCode", sql.NVarChar, req.body.EmpCode)
                 .execute("Nano_GET_GROUP_BY_Summary")
         })
         .then(result => {
@@ -537,6 +548,7 @@ export const GetSummaryCAOnly = (req, res) => {
         .then(pool => {
             return pool.request()
                 .input("CAID", sql.NVarChar, req.params.CAID)
+                .input("EmpCode", sql.NVarChar, req.body.EmpCode)
                 .execute("Nano_GET_Summary_CA_Only")
         })
         .then(result => {
